@@ -13,6 +13,8 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://zustit.com",
+  "https://noaze.com",
+  "https://www.noaze.com",
   "https://www.zustit.com",
 ];
 

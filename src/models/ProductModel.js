@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
-
+// Extra Key–Value Schema (Reusable)
+const keyValueSchema = new mongoose.Schema(
+  {
+    key: { type: String, required: true },
+    value: { type: String, required: true },
+  },
+  { _id: false }
+);
 const variantSchema = new mongoose.Schema(
   {
     name: { type: String, required: true }, // e.g., "Size", "Color"
@@ -63,6 +70,25 @@ const productSchema = new mongoose.Schema(
     shortDescription: { type: String },
     description: { type: String, required: true },
     sections: [sectionSchema],
+    // ⭐ NEW: Product Features (key-value)
+    features: [keyValueSchema], // Example: { key: "Material", value: "Aluminium Alloy" }
+
+    // ⭐ NEW: Specifications (key-value)
+    specifications: [keyValueSchema], // Example: { key: "Wavelength", value: "660nm" }
+
+    // ⭐ NEW: Warranty
+    warranty: {
+      available: { type: Boolean, default: false },
+      duration: { type: String }, // e.g., "1 Year", "6 Months"
+      terms: { type: String }, // free text
+    },
+
+    // ⭐ NEW: Return Policy
+    returnPolicy: {
+      returnable: { type: Boolean, default: false },
+      returnWindow: { type: String }, // e.g., "7 Days", "30 Days"
+      conditions: { type: String }, // e.g., "Only unopened items"
+    },
     // SEO
     metaTitle: { type: String },
     metaDescription: { type: String },
