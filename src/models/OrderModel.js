@@ -78,7 +78,7 @@ const orderSchema = new mongoose.Schema(
     orderStatus: {
       type: String,
       enum: [
-        "Processing",
+        "Confirmed",
         "Packed",
         "Shipped",
         "Out for Delivery",

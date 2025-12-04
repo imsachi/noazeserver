@@ -2,7 +2,6 @@ import Order from "../models/OrderModel.js";
 import User from "../models/UserModel.js";
 
 export const placeOrder = async (req, res) => {
-  console.log(req.body);
   try {
     const userId = req.user._id;
 
@@ -43,5 +42,13 @@ export const placeOrder = async (req, res) => {
     res.json({ success: true, orderId: order._id });
   } catch (err) {
     res.status(500).json({ error: "Failed to place order" });
+  }
+};
+export const getOrders = async (req, res) => {
+  try {
+    const orders = await Order.find();
+    res.json({ success: true, orders });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
   }
 };
