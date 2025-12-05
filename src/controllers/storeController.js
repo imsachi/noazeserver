@@ -2,6 +2,7 @@ import StoreConfig from "../models/StoreConfigModel.js";
 import Product from "../models/ProductModel.js";
 
 export const calculateBill = async (req, res) => {
+  console.log(req.body, "fuck....");
   try {
     const { cartItems, pincode, couponCode } = req.body;
 
