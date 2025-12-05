@@ -2,12 +2,11 @@ import StoreConfig from "../models/StoreConfigModel.js";
 import Product from "../models/ProductModel.js";
 
 export const calculateBill = async (req, res) => {
-  console.log(req.body, "fuck....");
   try {
     const { cartItems, pincode, couponCode } = req.body;
 
     const config = await StoreConfig.findOne();
-    console.log(cartItems);
+
     if (!config) return res.status(500).json({ error: "Store config missing" });
 
     let subtotal = 0;

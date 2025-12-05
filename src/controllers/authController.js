@@ -32,7 +32,7 @@ export const registerUser = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.json({ success: true, message: "User registered", userId: user._id });
+    res.json({ success: true, message: "User registered", user: user });
   } catch (error) {
     console.error("REGISTER ERROR:", error);
     res.status(500).json({ error: "Server error", details: error.message });
