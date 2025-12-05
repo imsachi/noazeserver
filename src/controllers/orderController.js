@@ -27,7 +27,7 @@ export const placeOrder = async (req, res) => {
       },
       paymentMethod: "COD",
       paymentStatus: "Pending",
-      orderStatus: "Processing",
+      orderStatus: "Confirmed",
       expectedDelivery: new Date(Date.now() + 5 * 86400000), // 5 days auto
       trackingUpdates: [
         { status: "Order Placed", location: "System", date: new Date() },
@@ -35,12 +35,13 @@ export const placeOrder = async (req, res) => {
     });
 
     // link order inside User document
-    await User.findByIdAndUpdate(userId, {
-      $push: { orders: order._id },
-    });
+    // await User.findByIdAndUpdate(userId, {
+    //   $push: { orders: order._id },
+    // });
 
     res.json({ success: true, orderId: order._id });
   } catch (err) {
+    console.error(err.message);
     res.status(500).json({ error: "Failed to place order" });
   }
 };

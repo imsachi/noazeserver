@@ -85,7 +85,7 @@ const orderSchema = new mongoose.Schema(
         "Delivered",
         "Cancelled",
       ],
-      default: "Processing",
+      default: "Confirmed",
     },
 
     expectedDelivery: Date,
