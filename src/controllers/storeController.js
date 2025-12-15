@@ -61,6 +61,37 @@ export const calculateBill = async (req, res) => {
     res.status(500).json({ error: "Billing error", details: err.message });
   }
 };
+export const checkingPincode = async (req, res) => {
+  const { pin } = req.query;
+  if (!pin) {
+    return res.status(400).json({
+      success: false,
+      msg: "Destination pincode required",
+    });
+  }
+
+  try {
+    const response = await axios.get(
+      "https://track.delhivery.com/c/api/pin-codes/json/",
+      {
+        params: {
+          filter_codes: pin,
+        },
+        headers: {
+          Authorization: `Token ${process.env.DELHIVERY_TOKEN}`,
+        },
+      }
+    );
+
+    return res.json(response.data);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      msg: "Delivery check failed",
+    });
+  }
+};
 export const checkingDelivery = async (req, res) => {
   const { destination_pin } = req.query;
   if (!destination_pin) {
